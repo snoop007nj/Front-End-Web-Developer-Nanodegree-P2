@@ -39,8 +39,6 @@ var bio = {
 		var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
 		$("#header").append(formattedBioPic, formattedWelcomeMsg);
 
-		//HTMLbioPic
-
 
 		//-----skills
 		if (bio.skills.length > 0) {
@@ -86,7 +84,7 @@ var work = {
 		}
 	],
 	"display": function() {
-		for (job in work.jobs) {
+		for (var job in work.jobs) {
 			$("#workExperience").append(HTMLworkStart);
 
 			//-----company + position
@@ -199,17 +197,17 @@ var education = {
 
 		}
 
-		for (var item in education.onlineCourses) {
+		for (var itemOnline in education.onlineCourses) {
 			$("#education:last").append(HTMLonlineClasses);
 
 			//-----title + school
-			var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[item].title)
-				.replace("#", education.onlineCourses[item].url);
-			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[item].school);
+			var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[itemOnline].title)
+				.replace("#", education.onlineCourses[itemOnline].url);
+			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[itemOnline].school);
 			var formattedOnlineSchoolDegree = formattedTitle + formattedOnlineSchool;
 
 			//-----dates
-			var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[item].dates);
+			var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[itemOnline].dates);
 
 			$("h3:last").append(formattedOnlineSchoolDegree, formattedOnlineDates);
 		}		
