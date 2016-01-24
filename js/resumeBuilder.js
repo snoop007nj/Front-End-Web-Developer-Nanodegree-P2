@@ -119,7 +119,9 @@ var projects = {
 			"dates": "December 2015",
 			"location": "Online",
 			"description": "HTML/CSS.  Develop a responsive website that displays images, descriptions and links to each of the portfolio projects that will completed",
-			"images": "images/Screen Shot.png",
+			"images": [
+				"images/Screen Shot.png"
+			],
 			"url": "https://github.com/snoop007nj/Front-End-Web-Developer-Nanodegree-P1"
 		}
 	],
@@ -140,12 +142,13 @@ var projects = {
 			//-----description
 			var formattedDescription = HTMLworkDescription.replace("%data%", projects.projects[item].description);
 
+			$(".project-entry:last").append(formattedTitle, formattedDate, formattedLocation, formattedDescription);
+
 			//-----image
-			var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[item].images);			
-
-
-			$(".project-entry:last").append(formattedTitle, formattedDate, formattedLocation, formattedDescription, formattedImage);
-
+			for (var img in projects.projects[item].images) {
+				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[item].images[img]);
+				$(".project-entry:last").append(formattedImage);
+			}
 		}	
 	}
 };
