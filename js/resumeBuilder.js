@@ -163,7 +163,7 @@ var education = {
 		{
 			"name": "Johns Hopkins University",
 			"degree": "Masters of Science",
-			"dates": "May 2015",
+			"dates": "2015",
 			"major": "Computer Science",
 			"location": "Balimore, MD, US",
 			"url": "https://www.cs.jhu.edu",
@@ -173,7 +173,7 @@ var education = {
 		{
 			"title": "Front-End Web Developer Nanodegree",
 			"school": "Udacity",
-			"dates": "June 2016 (expected)",
+			"dates": "2016",
 			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 		}
 	],
