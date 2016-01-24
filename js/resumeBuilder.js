@@ -221,41 +221,4 @@ education.display();
 //----------EDUCATION----------//
 
 
-// function locationizer(work_obj) {
-// 	var locationArray = [];
-
-// 	for (job in work_obj.jobs) {
-// 		var newLocation = work_obj.jobs[job].location;
-// 		locationArray.push(newLocation);
-// 	}
-
-// 	return locationArray;
-// }
-
-// console.log(locationizer(work));
-
-
-//----------Internationalize Button----------//
-// function inName(name) {
-// 	if (typeof name == 'undefined') {
-// 		return '';
-// 	}
-
-// 	name = name.trim().split(" ");
-// 	console.log(name);
-// 	name[1] = name[1].toUpperCase();
-// 	name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
-
-//     console.log(name);
-//     console.log($("name").text())
-
-// 	return name[0] + " " + name[1];
-// }
-
-//console.log(inName(bio.name));
-
-//$('#main').append(internationalizeButton);
-//----------Internationalize Button----------//
-
-
 $("#mapDiv").append(googleMap);
