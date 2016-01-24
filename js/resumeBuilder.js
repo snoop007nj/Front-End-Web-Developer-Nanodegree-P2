@@ -39,14 +39,14 @@ var bio = {
 		var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
 		$("#header").append(formattedBioPic, formattedWelcomeMsg);
 
-		HTMLbioPic
+		//HTMLbioPic
 
 
 		//-----skills
 		if (bio.skills.length > 0) {
 			$("#header").append(HTMLskillsStart);
 
-		    for (skill in bio.skills) {
+		    for (var skill in bio.skills) {
 		    	var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
 				$("#skills").append(formattedSkill);	
 		    }
@@ -126,7 +126,7 @@ var projects = {
 		}
 	],
 	"display": function() {
-		for (item in projects.projects) {
+		for (var item in projects.projects) {
 			$("#projects").append(HTMLprojectStart);
 
 			//-----title
@@ -177,7 +177,7 @@ var education = {
 		}
 	],
 	"display": function() {
-		for (item in education.schools) {
+		for (var item in education.schools) {
 			$("#education").append(HTMLschoolStart);
 
 			//-----school + degree
@@ -199,19 +199,19 @@ var education = {
 
 		}
 
-		for (item in education.onlineCourses) {
+		for (var item in education.onlineCourses) {
 			$("#education:last").append(HTMLonlineClasses);
 
 			//-----title + school
 			var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[item].title)
 				.replace("#", education.onlineCourses[item].url);
-			var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[item].school);
-			var formattedSchoolDegree = formattedTitle + formattedSchool;
+			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[item].school);
+			var formattedOnlineSchoolDegree = formattedTitle + formattedOnlineSchool;
 
 			//-----dates
-			var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[item].dates);
+			var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[item].dates);
 
-			$("h3:last").append(formattedSchoolDegree, formattedDates);
+			$("h3:last").append(formattedOnlineSchoolDegree, formattedOnlineDates);
 		}		
 	}
 };
