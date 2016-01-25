@@ -2,8 +2,10 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
-//name = "Duong Nguyen"
-//$("#main").append(name);
+'use strict';
+
+var $header = $("#header");
+var data = '%data%';
 
 
 //----------HEADER----------//
@@ -21,31 +23,32 @@ var bio = {
 	"biopic": "images/dc_horizon_1024x575.jpg",
 	"display": function() {
 		//-----name and role
-		var formattedName = HTMLheaderName.replace("%data%", bio.name);
-		var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-		$("#header").prepend(formattedRole);
-		$("#header").prepend(formattedName);
+		var formattedName = HTMLheaderName.replace(data, bio.name);
+		var formattedRole = HTMLheaderRole.replace(data, bio.role);
+		$header.prepend(formattedRole);
+		$header.prepend(formattedName);
 
 
 		//-----contact
-		var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-		var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-		var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-		var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-		$("#topContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedLocation);
-		$("#footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedLocation);
+		var formattedMobile = HTMLmobile.replace(data, bio.contacts.mobile);
+		var formattedEmail = HTMLemail.replace(data, bio.contacts.email);
+		var formattedGithub = HTMLgithub.replace(data, bio.contacts.github);
+		var formattedLocation = HTMLlocation.replace(data, bio.contacts.location);
+		$("#topContacts, #footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedLocation);
 
-		var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-		var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-		$("#header").append(formattedBioPic, formattedWelcomeMsg);
+		var formattedWelcomeMsg = HTMLwelcomeMsg.replace(data, bio.welcomeMessage);
+		var formattedBioPic = HTMLbioPic.replace(data, bio.biopic);
+		$header.append(formattedBioPic, formattedWelcomeMsg);
 
 
 		//-----skills
-		if (bio.skills.length > 0) {
-			$("#header").append(HTMLskillsStart);
+		if (bio.skills.length) {
+			$header.append(HTMLskillsStart);
 
 		    for (var skill in bio.skills) {
-		    	var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+		    	var thisSkill = bio.skills[skill];
+
+		    	var formattedSkill = HTMLskills.replace(data, thisSkill);
 				$("#skills").append(formattedSkill);	
 		    }
 		}	
@@ -85,22 +88,24 @@ var work = {
 	],
 	"display": function() {
 		for (var job in work.jobs) {
+			var thisJob = work.jobs[job];
+
 			$("#workExperience").append(HTMLworkStart);
 
 			//-----company + position
-			var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer)
+			var formattedEmployer = HTMLworkEmployer.replace(data, thisJob.employer)
 				.replace("#", work.jobs[job].url);
-			var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+			var formattedTitle = HTMLworkTitle.replace(data, thisJob.title);
 			var formattedEmployerTitle = formattedEmployer + formattedTitle;
 
 			//-----date
-			var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+			var formattedDates = HTMLworkDates.replace(data, thisJob.dates);
 
 			//-----location
-			var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+			var formattedLocation = HTMLworkLocation.replace(data, thisJob.location);
 
 			//-----description
-			var formattedDesciption = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+			var formattedDesciption = HTMLworkDescription.replace(data, thisJob.description);
 			
 			$(".work-entry:last").append(formattedEmployerTitle, formattedDates, formattedLocation, formattedDesciption);		
 		}
@@ -127,26 +132,28 @@ var projects = {
 	],
 	"display": function() {
 		for (var item in projects.projects) {
+			var thisProject = projects.projects[item];
+
 			$("#projects").append(HTMLprojectStart);
 
 			//-----title
-			var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[item].title)
+			var formattedTitle = HTMLprojectTitle.replace(data, thisProject.title)
 				.replace("#", projects.projects[item].url);
 
 			//-----date
-			var formattedDate = HTMLworkDates.replace("%data%", projects.projects[item].dates);
+			var formattedDate = HTMLworkDates.replace(data, thisProject.dates);
 
 			//-----location
-			var formattedLocation = HTMLworkLocation.replace("%data%", projects.projects[item].location);
+			var formattedLocation = HTMLworkLocation.replace(data, thisProject.location);
 
 			//-----description
-			var formattedDescription = HTMLworkDescription.replace("%data%", projects.projects[item].description);
+			var formattedDescription = HTMLworkDescription.replace(data, thisProject.description);
 
 			$(".project-entry:last").append(formattedTitle, formattedDate, formattedLocation, formattedDescription);
 
 			//-----image
-			for (var img in projects.projects[item].images) {
-				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[item].images[img]);
+			for (var img = 0, len = thisProject.images.length; img < len; img++) {
+				var formattedImage = HTMLprojectImage.replace(data, projects.projects[item].images[img]);
 				$(".project-entry:last").append(formattedImage);
 			}
 		}	
@@ -163,8 +170,8 @@ var education = {
 		{
 			"name": "Johns Hopkins University",
 			"degree": "Masters of Science",
-			"dates": "2015",
-			"major": "Computer Science",
+			"dates": 2015,
+			"majors": ["Computer Science"],
 			"location": "Balimore, MD, US",
 			"url": "https://www.cs.jhu.edu",
 		}
@@ -173,44 +180,48 @@ var education = {
 		{
 			"title": "Front-End Web Developer Nanodegree",
 			"school": "Udacity",
-			"dates": "2016",
+			"date": 2016,
 			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 		}
 	],
 	"display": function() {
 		for (var item in education.schools) {
+			var thisSchool = education.schools[item];
+
 			$("#education").append(HTMLschoolStart);
 
 			//-----school + degree
-			var formattedSchool = HTMLschoolName.replace("%data%", education.schools[item].name)
+			var formattedSchool = HTMLschoolName.replace(data, thisSchool.name)
 				.replace("#", education.schools[item].url);
-			var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[item].degree);
+			var formattedDegree = HTMLschoolDegree.replace(data, thisSchool.degree);
 			var formattedSchoolDegree = formattedSchool + formattedDegree;
 
 			//-----dates
-			var formattedDates = HTMLworkDates.replace("%data%", education.schools[item].dates);
+			var formattedDates = HTMLworkDates.replace(data, thisSchool.dates);
 
 			//-----location
-			var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[item].location);
+			var formattedLocation = HTMLschoolLocation.replace(data, thisSchool.location);
 
-			//-----major
-			var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[item].major);
+			$(".education-entry:last").append(formattedSchoolDegree, formattedDates, formattedLocation);
 
-			$(".education-entry:last").append(formattedSchoolDegree, formattedDates, formattedLocation, formattedMajor);
-
+			//-----majors
+			for (var major = 0, len = thisSchool.majors.length; major < len; major++) {
+				var formattedMajor = HTMLschoolMajor.replace(data, thisSchool.majors[major]);
+				$(".education-entry:last").append(formattedMajor);
+			}
 		}
 
 		for (var itemOnline in education.onlineCourses) {
 			$("#education:last").append(HTMLonlineClasses);
 
 			//-----title + school
-			var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[itemOnline].title)
+			var formattedTitle = HTMLonlineTitle.replace(data, education.onlineCourses[itemOnline].title)
 				.replace("#", education.onlineCourses[itemOnline].url);
-			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[itemOnline].school);
+			var formattedOnlineSchool = HTMLonlineSchool.replace(data, education.onlineCourses[itemOnline].school);
 			var formattedOnlineSchoolDegree = formattedTitle + formattedOnlineSchool;
 
 			//-----dates
-			var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[itemOnline].dates);
+			var formattedOnlineDates = HTMLonlineDates.replace(data, education.onlineCourses[itemOnline].date);
 
 			$("h3:last").append(formattedOnlineSchoolDegree, formattedOnlineDates);
 		}		
